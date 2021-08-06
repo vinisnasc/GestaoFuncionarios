@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoFuncionarios.Model", "GestaoFuncionarios.Model\GestaoFuncionarios.Model.csproj", "{4CA6CE25-2C9F-43BF-B2BB-8ED1E63FCF73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestaoFuncionarios.Model", "GestaoFuncionarios.Model\GestaoFuncionarios.Model.csproj", "{4CA6CE25-2C9F-43BF-B2BB-8ED1E63FCF73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoFuncionarios.Service", "GestaoFuncionarios.Service\GestaoFuncionarios.Service.csproj", "{4776774D-489D-4B02-AA6E-A4F38BD680B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestaoFuncionarios.Service", "GestaoFuncionarios.Service\GestaoFuncionarios.Service.csproj", "{4776774D-489D-4B02-AA6E-A4F38BD680B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoFuncionarios.Dados", "GestaoFuncionarios.Dados\GestaoFuncionarios.Dados.csproj", "{B39F35F1-ACEB-4831-AA21-DCBA9B139FA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestaoFuncionarios.Dados", "GestaoFuncionarios.Dados\GestaoFuncionarios.Dados.csproj", "{B39F35F1-ACEB-4831-AA21-DCBA9B139FA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoFuncionarios.IOC", "GestaoFuncionarios.IOC\GestaoFuncionarios.IOC.csproj", "{14134F95-E241-43D3-B7F7-511C83F8F3AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoFuncionarios.API", "GestaoFuncionarios.API\GestaoFuncionarios.API.csproj", "{89618762-D783-4455-8B44-38674EF85B56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{B39F35F1-ACEB-4831-AA21-DCBA9B139FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39F35F1-ACEB-4831-AA21-DCBA9B139FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39F35F1-ACEB-4831-AA21-DCBA9B139FA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14134F95-E241-43D3-B7F7-511C83F8F3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14134F95-E241-43D3-B7F7-511C83F8F3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14134F95-E241-43D3-B7F7-511C83F8F3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14134F95-E241-43D3-B7F7-511C83F8F3AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89618762-D783-4455-8B44-38674EF85B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89618762-D783-4455-8B44-38674EF85B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89618762-D783-4455-8B44-38674EF85B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89618762-D783-4455-8B44-38674EF85B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

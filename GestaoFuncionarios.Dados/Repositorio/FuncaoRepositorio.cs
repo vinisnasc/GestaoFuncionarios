@@ -19,9 +19,24 @@ namespace GestaoFuncionarios.Dados.Repositorio
             return base.Incluir(funcao);
         }
 
+        public override bool Alterar(Funcao funcao)
+        {
+            return base.Alterar(funcao);
+        }
+
         public Funcao ProcurarPorFuncao(string funcao)
         {
             return _contexto.Funcao.FirstOrDefault(x => x.NomeFuncao == funcao);
+        }
+
+        public override List<Funcao> SelecionarTudo()
+        {
+            return base.SelecionarTudo();
+        }
+
+        public override Funcao SelecionarPorId(int id)
+        {
+            return base.SelecionarPorId(id);
         }
     }
 }

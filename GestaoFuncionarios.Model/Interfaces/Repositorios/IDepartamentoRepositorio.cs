@@ -9,5 +9,9 @@ namespace GestaoFuncionarios.Model.Interfaces.Repositorios
     public interface IDepartamentoRepositorio
     {
         bool Incluir(Departamento departamento);
+        bool Alterar(Departamento departamento);
+        List<Departamento> SelecionarTudo();
+        Departamento SelecionarPorId(int id);
+        bool Existe(string depto, string subDepto);
     }
 }

@@ -18,5 +18,26 @@ namespace GestaoFuncionarios.Dados.Repositorio
         {
             return base.Incluir(departamento);
         }
+
+        public override bool Alterar(Departamento departamento)
+        {
+            return base.Alterar(departamento);
+        }
+
+        public override Departamento SelecionarPorId(int id)
+        {
+            return base.SelecionarPorId(id);
+        }
+
+        public override List<Departamento> SelecionarTudo()
+        {
+            return base.SelecionarTudo();
+        }
+
+        public bool Existe(string depto, string subDepto)
+        {
+            return _contexto.Departamento.Any(d => d.NomeDepartamento == depto.Trim().ToLower()
+                                                && d.NomeSubDepartamento == subDepto.Trim().ToLower());
+        }
     }
 }

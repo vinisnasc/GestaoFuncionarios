@@ -15,7 +15,7 @@ namespace GestaoFuncionarios.Dados
         public DbSet<Departamento> Departamento { get; set; }
         public DbSet<Funcao> Funcao { get; set; }
 
-        public override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);

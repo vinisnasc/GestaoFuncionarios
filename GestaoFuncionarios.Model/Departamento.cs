@@ -12,5 +12,6 @@ namespace GestaoFuncionarios.Model
         public int Id { get; set; }
         public string NomeDepartamento { get; set; }
         public string NomeSubDepartamento { get; set; }
+        public List<Funcionario> Funcionarios { get; set; }
     }
 }

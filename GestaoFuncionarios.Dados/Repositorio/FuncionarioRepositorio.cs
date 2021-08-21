@@ -14,5 +14,15 @@ namespace GestaoFuncionarios.Dados.Repositorio
         public FuncionarioRepositorio(Contexto contexto) : base(contexto)
         { 
         }
+
+        public override bool Incluir(Funcionario funcionario)
+        {
+            return base.Incluir(funcionario);
+        }
+
+        public override bool Alterar(Funcionario funcionario)
+        {
+            return base.Alterar(funcionario);
+        }
     }
 }

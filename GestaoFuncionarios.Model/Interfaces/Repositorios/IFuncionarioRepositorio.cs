@@ -8,5 +8,7 @@ namespace GestaoFuncionarios.Model.Interfaces.Repositorios
 {
     public interface IFuncionarioRepositorio
     {
+        bool Incluir(Funcionario funcionario);
+        bool Alterar(Funcionario funcionario);
     }
 }

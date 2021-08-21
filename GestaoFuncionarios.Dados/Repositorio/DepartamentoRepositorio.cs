@@ -12,7 +12,9 @@ namespace GestaoFuncionarios.Dados.Repositorio
     {
         private readonly Contexto _contexto;
         public DepartamentoRepositorio(Contexto contexto) : base(contexto)
-        { }
+        {
+            _contexto = contexto;
+        }
 
         public override bool Incluir(Departamento departamento)
         {

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestaoFuncionarios.Dados;
 using GestaoFuncionarios.Model;
+using GestaoFuncionarios.Model.Interfaces.Services;
+using GestaoFuncionarios.Model.DTO;
 
 namespace GestaoFuncionarios.API.Controllers
 {
@@ -14,95 +16,49 @@ namespace GestaoFuncionarios.API.Controllers
     [ApiController]
     public class FuncaoController : ControllerBase
     {
-        private readonly Contexto _context;
+        private readonly IFuncaoService _funcaoService;
 
-        public FuncaoController(Contexto context)
+        public FuncaoController(IFuncaoService funcaoService)
         {
-            _context = context;
+            _funcaoService = funcaoService;
         }
 
-        // GET: api/Funcao
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Funcao>>> GetFuncao()
+        public IEnumerable<Funcao> GetFuncao()
         {
-            return await _context.Funcao.ToListAsync();
+            return _funcaoService.SelecionarTudo();
         }
 
-        // GET: api/Funcao/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Funcao>> GetFuncao(int id)
-        {
-            var funcao = await _context.Funcao.FindAsync(id);
-
-            if (funcao == null)
-            {
-                return NotFound();
-            }
-
-            return funcao;
-        }
-
-        // PUT: api/Funcao/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFuncao(int id, Funcao funcao)
-        {
-            if (id != funcao.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(funcao).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FuncaoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Funcao
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Funcao>> PostFuncao(Funcao funcao)
+        public ActionResult Post(FuncaoDTO dto)
         {
-            _context.Funcao.Add(funcao);
-            await _context.SaveChangesAsync();
+            _funcaoService.CadastrarFuncao(dto);
 
-            return CreatedAtAction("GetFuncao", new { id = funcao.Id }, funcao);
+            return Ok("Função cadastrada com sucesso!");
         }
 
-        // DELETE: api/Funcao/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFuncao(int id)
+        [HttpPut("{idAlterarSalario}")]
+        public IActionResult AlterarSalarioPorValor(int id, double valor)
         {
-            var funcao = await _context.Funcao.FindAsync(id);
-            if (funcao == null)
-            {
-                return NotFound();
-            }
+            _funcaoService.AumentarSalarioFuncaoValor(id, valor);
 
-            _context.Funcao.Remove(funcao);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok("Valor de salário da função alterado com sucesso!");
         }
 
-        private bool FuncaoExists(int id)
+        [HttpPut("{id}")]
+        public IActionResult AlterarSalarioPorPorcentagem(int id, double valor)
         {
-            return _context.Funcao.Any(e => e.Id == id);
+            _funcaoService.AumentarSalarioFuncaoPorcentualmente(id, valor);
+
+            return Ok("Valor de salário da função alterado com sucesso!");
+        }
+
+        [HttpPut("{idDissidio}")]
+        public IActionResult Dissidio(double valor)
+        {
+            _funcaoService.AumentarSalarioDissidio(valor);
+
+            return Ok("Valor de salário da função alterado com sucesso!");
         }
     }
 }

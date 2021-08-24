@@ -13,5 +13,6 @@ namespace GestaoFuncionarios.Model.Interfaces.Repositorios
         List<Departamento> SelecionarTudo();
         Departamento SelecionarPorId(int id);
         bool Existe(string depto, string subDepto);
+        Departamento SelecionarPorNome(string departamento, string subDepartamento);
     }
 }

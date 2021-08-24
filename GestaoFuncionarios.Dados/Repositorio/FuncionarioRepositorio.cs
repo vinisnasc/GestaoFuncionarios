@@ -12,7 +12,8 @@ namespace GestaoFuncionarios.Dados.Repositorio
     {
         private readonly Contexto _contexto;
         public FuncionarioRepositorio(Contexto contexto) : base(contexto)
-        { 
+        {
+            _contexto = contexto;
         }
 
         public override bool Incluir(Funcionario funcionario)
@@ -23,6 +24,11 @@ namespace GestaoFuncionarios.Dados.Repositorio
         public override bool Alterar(Funcionario funcionario)
         {
             return base.Alterar(funcionario);
+        }
+
+        public override List<Funcionario> SelecionarTudo()
+        {
+            return base.SelecionarTudo();
         }
     }
 }

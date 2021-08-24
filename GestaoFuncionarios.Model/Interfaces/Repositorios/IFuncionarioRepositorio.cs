@@ -10,5 +10,6 @@ namespace GestaoFuncionarios.Model.Interfaces.Repositorios
     {
         bool Incluir(Funcionario funcionario);
         bool Alterar(Funcionario funcionario);
+        List<Funcionario> SelecionarTudo();
     }
 }

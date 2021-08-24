@@ -36,6 +36,12 @@ namespace GestaoFuncionarios.Dados.Repositorio
             return base.SelecionarTudo();
         }
 
+        public Departamento SelecionarPorNome(string departamento, string subDepartamento)
+        {
+            return _contexto.Departamento.FirstOrDefault(d => d.NomeDepartamento == departamento.Trim().ToLower() &&
+                                                              d.NomeSubDepartamento == subDepartamento.Trim().ToLower());
+        }
+
         public bool Existe(string depto, string subDepto)
         {
             return _contexto.Departamento.Any(d => d.NomeDepartamento == depto.Trim().ToLower()

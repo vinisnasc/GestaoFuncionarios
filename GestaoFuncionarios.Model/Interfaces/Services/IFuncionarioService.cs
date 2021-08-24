@@ -9,6 +9,7 @@ namespace GestaoFuncionarios.Model.Interfaces.Services
 {
     public interface IFuncionarioService
     {
-        void CadastrarFuncionario(FuncionarioDTO dto);
+        bool CadastrarFuncionario(FuncionarioDTO dto);
+        List<Funcionario> SelecionarTudo();
     }
 }

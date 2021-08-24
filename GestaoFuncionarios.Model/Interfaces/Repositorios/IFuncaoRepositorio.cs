@@ -10,6 +10,7 @@ namespace GestaoFuncionarios.Model.Interfaces.Repositorios
     {
         Funcao ProcurarPorFuncao(string funcao);
         List<Funcao> SelecionarTudo();
+        Funcao SelecionarPorNome(string nome);
         Funcao SelecionarPorId(int id);
         bool Incluir(Funcao funcao);
         bool Alterar(Funcao funcao);

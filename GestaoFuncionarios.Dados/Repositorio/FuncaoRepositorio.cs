@@ -40,5 +40,10 @@ namespace GestaoFuncionarios.Dados.Repositorio
         {
             return base.SelecionarPorId(id);
         }
+
+        public Funcao SelecionarPorNome(string nome)
+        {
+            return _contexto.Funcao.FirstOrDefault(f => f.NomeFuncao == nome);
+        }
     }
 }

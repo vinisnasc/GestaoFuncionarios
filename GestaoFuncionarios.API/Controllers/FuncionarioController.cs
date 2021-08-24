@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestaoFuncionarios.Dados;
 using GestaoFuncionarios.Model;
+using GestaoFuncionarios.Model.Interfaces.Services;
+using GestaoFuncionarios.Model.DTO;
 
 namespace GestaoFuncionarios.API.Controllers
 {
@@ -14,95 +16,29 @@ namespace GestaoFuncionarios.API.Controllers
     [ApiController]
     public class FuncionarioController : ControllerBase
     {
-        private readonly Contexto _context;
+        private readonly IFuncionarioService _funcionarioService;
 
-        public FuncionarioController(Contexto context)
+        public FuncionarioController(IFuncionarioService funcionarioService)
         {
-            _context = context;
+            _funcionarioService = funcionarioService;
         }
 
-        // GET: api/Funcionario
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Funcionario>>> GetFuncionario()
+        public IEnumerable<Funcionario> GetFuncionario()
         {
-            return await _context.Funcionario.ToListAsync();
+            return _funcionarioService.SelecionarTudo();
         }
 
-        // GET: api/Funcionario/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Funcionario>> GetFuncionario(int id)
-        {
-            var funcionario = await _context.Funcionario.FindAsync(id);
-
-            if (funcionario == null)
-            {
-                return NotFound();
-            }
-
-            return funcionario;
-        }
-
-        // PUT: api/Funcionario/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFuncionario(int id, Funcionario funcionario)
-        {
-            if (id != funcionario.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(funcionario).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FuncionarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Funcionario
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Funcionario>> PostFuncionario(Funcionario funcionario)
+        public  ActionResult PostFuncionario([FromQuery]FuncionarioDTO dto)
         {
-            _context.Funcionario.Add(funcionario);
-            await _context.SaveChangesAsync();
+            bool result = _funcionarioService.CadastrarFuncionario(dto);
 
-            return CreatedAtAction("GetFuncionario", new { id = funcionario.Id }, funcionario);
-        }
+            if (result)
+                return Ok("Funcionario cadastrado!");
 
-        // DELETE: api/Funcionario/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFuncionario(int id)
-        {
-            var funcionario = await _context.Funcionario.FindAsync(id);
-            if (funcionario == null)
-            {
-                return NotFound();
-            }
-
-            _context.Funcionario.Remove(funcionario);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool FuncionarioExists(int id)
-        {
-            return _context.Funcionario.Any(e => e.Id == id);
+            else
+                return BadRequest("Erro ao cadastrar o funcionario!");
         }
     }
 }

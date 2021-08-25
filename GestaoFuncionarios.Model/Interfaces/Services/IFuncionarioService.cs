@@ -11,5 +11,6 @@ namespace GestaoFuncionarios.Model.Interfaces.Services
     {
         bool CadastrarFuncionario(FuncionarioDTO dto);
         List<Funcionario> SelecionarTudo();
+        void ImportarCadastro(string endereco);
     }
 }

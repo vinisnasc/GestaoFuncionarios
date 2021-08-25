@@ -30,7 +30,7 @@ namespace GestaoFuncionarios.API.Controllers
         }
 
         [HttpPost]
-        public  ActionResult PostFuncionario([FromQuery]FuncionarioDTO dto)
+        public ActionResult PostFuncionario([FromBody] FuncionarioDTO dto)
         {
             bool result = _funcionarioService.CadastrarFuncionario(dto);
 
@@ -39,6 +39,14 @@ namespace GestaoFuncionarios.API.Controllers
 
             else
                 return BadRequest("Erro ao cadastrar o funcionario!");
+        }
+
+        [HttpPost("ImportarDados")]
+        public ActionResult ImportarDados([FromQuery] string endereco)
+        {
+            _funcionarioService.ImportarCadastro(endereco);
+
+            return Ok("Funcionario cadastrado!");
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using GestaoFuncionarios.Model;
 using GestaoFuncionarios.Model.DTO;
+using GestaoFuncionarios.Model.Enums;
 using GestaoFuncionarios.Model.Interfaces.Repositorios;
 using GestaoFuncionarios.Model.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GestaoFuncionarios.Service
 {
@@ -29,12 +31,36 @@ namespace GestaoFuncionarios.Service
                 Funcionario funcionario = new();
                 funcionario.Nome = dto.Nome;
                 funcionario.sexo = dto.sexo;
-                funcionario.Departamento = _unitOfWork.DepartamentoRepositorio.SelecionarPorNome(dto.Departamento, dto.SubDepartamento);
+                funcionario.Departamento = dep;
                 funcionario.DataAdmissao = dto.DataAdmissao;
-                funcionario.Funcao = _unitOfWork.FuncaoRepositorio.SelecionarPorNome(dto.Funcao);
-                funcionario.Salario = _unitOfWork.FuncaoRepositorio.SelecionarPorNome(dto.Funcao).Salario;
+                funcionario.Funcao = fun;
+                funcionario.Salario = fun.Salario;
                 _unitOfWork.FuncionarioRepositorio.Incluir(funcionario);
                 return true;
+            }
+        }
+
+        public void ImportarCadastro(string endereco)
+        {
+            string[] lines = File.ReadAllLines(endereco);
+
+            using (FileStream fs = new(endereco, FileMode.Open))
+            {
+                using (StreamReader sr = new(fs))
+                {
+                    foreach (string linha in lines)
+                    {
+                        string[] separadorLinha = linha.Split(",");
+                        FuncionarioDTO dto = new();
+                        dto.Nome = separadorLinha[0].Trim();
+                        dto.Funcao = separadorLinha[1].Trim();
+                        dto.sexo = Enum.Parse<Sexo>(separadorLinha[2].Trim());
+                        dto.Departamento = separadorLinha[3].Trim();
+                        dto.SubDepartamento = separadorLinha[4].Trim();
+                        dto.DataAdmissao = DateTime.Parse(separadorLinha[5].Trim());
+                        CadastrarFuncionario(dto);
+                    }
+                }
             }
         }
 
@@ -42,5 +68,7 @@ namespace GestaoFuncionarios.Service
         {
             return _unitOfWork.FuncionarioRepositorio.SelecionarTudo();
         }
+
+        // TODO: Tentar fazer importação de dados
     }
 }
